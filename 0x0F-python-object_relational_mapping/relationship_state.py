@@ -1,20 +1,22 @@
 #!/usr/bin/python3
-"""
-Contains State class and Base, an instance of declarative_base()
-"""
-from sqlalchemy import Column, Integer, String, MetaData
+'''
+Contains a class state and and instance of declarative_base() from sqlalchemy
+'''
+from sqlalchemy import Integer, String, Column
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-mymetadata = MetaData()
-Base = declarative_base(metadata=mymetadata)
+Base = declarative_base()
 
 
 class State(Base):
-    """
-    Class with id and name attributes of each state
-    """
+    '''A model for the states that links to a table states on the db server
+    Attributes:
+        id(str): An auto generated unique integer, can't be null and is a pk
+        name(str): The name of the state, max 128 chars and can't be null
+    '''
     __tablename__ = 'states'
-    id = Column(Integer, unique=True, nullable=False, primary_key=True)
+    id = Column(Integer(), primary_key=True, nullable=False)
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="states")
+    cities = relationship("City", backref="state",
+                          cascade="all, delete, delete-orphan")

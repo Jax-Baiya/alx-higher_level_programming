@@ -1,17 +1,20 @@
 #!/usr/bin/python3
-"""
-Contains the class definition of a City
-"""
+'''
+Contains a class state and and instance of declarative_base() from sqlalchemy
+'''
+from sqlalchemy import Integer, String, Column, ForeignKey
 from model_state import Base
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
 
 
 class City(Base):
-    """
-    Class that defines each city
-    """
+    '''A model for the city that links to a table cities on the db server
+    Has a one to many relationship with states
+    Attributes:
+        id(int): An auto generated unique integer, can't be null and is a pk
+        name(str): The name of the state, max 128 chars and can't be null
+        state_id(int): Foreign key to states.id can't be null
+    '''
     __tablename__ = 'cities'
-    id = Column(Integer, unique=True, nullable=False, primary_key=True)
+    id = Column(Integer(), primary_key=True, nullable=False)
     name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey("states.id"), nullable=False)
+    state_id = Column(Integer(), ForeignKey('states.id'), nullable=False)
