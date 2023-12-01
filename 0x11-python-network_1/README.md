@@ -1,6 +1,6 @@
 # 0x11-python-network_1
 
-### In this project, I leart about:
+### In this project, I learnt about:
 - How to fetch internet resources with the Python package urllib
 - How to decode urllib body response
 - How to use the Python package requests #requestsiswaysimplerthanurllib
